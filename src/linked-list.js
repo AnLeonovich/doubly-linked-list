@@ -2,45 +2,38 @@ const Node = require('./node');
 
 class LinkedList {
     
-    function constructor() {
+    constructor() {
     this._length = 0;
     this.head = null;
     this.tail = null;
-
     }
 
-    function append(data) {
-var node = this._createNewNode(data);
+   append(data) {
+    var node = this._createNewNode(data);
 
-    if (this._head === null) {
-
-      // we are empty, so this is the first node
-      // use the same logic as append
-      return this.append(data);
-    } else {
-
-      // place before head
-      this._head.prev = node;
-      node.next = this._head;
+    if (this._head != 0) {
+      this._tail.next = node;
+      node.prev = this._tail;
+      this._tail = node;
+    } else {   
+      this._tail = node;
       this._head = node;
     }
 
-    // update count
     this._length++;
 
-    return node;
-  };
+    return this;
     }
 
-   function head() {
-    return this._head;
+   head() {
+    return this._head.data;
     }
 
-   function tail() {
-    return this._tail;
+   tail() {
+    return this._tail.data;
     }
 
-   function at(index) {
+   at(index) {!!!
       if (index >= 0 && index < this._length) {
       var node = this._head;
       while (index--) {
@@ -51,30 +44,78 @@ var node = this._createNewNode(data);
 
     };
 
-    function insertAt(index, data) {}
+   insertAt(index, data) {
+    var node = new Node(data),
+        currentNode = this.head,
+        count = 0;
+    if (!currentNode) {
+        this.head = node;
+        this._length++;
 
-   function isEmpty() {
-        if (this._length=0) {
-      return true;
+        return this;
     } else {
-      return false;
+
+    while (count < index) {
+            currentNode = currentNode.next;
+            count++; }
+      node.prev = currentNode.prev;
+      node.next = currentNode;
+      currentNode.prev = node;
+}
+    this._length++;
+
+    return this;
+
+   }
+
+   isEmpty() {
+    if (this._length==0) {
+    return true;
+    } else {
+    return false;
   }
 
     }
 
-    function clear() {
+    clear() {
          while (!this.isEmpty()) {
                 this.remove();
             }
     }
 
-    function deleteAt(index) {
+   deleteAt(index) {
+    
+    var currentNode = this.head
+    var count = 0;
 
+    while (count < index) {
+            currentNode = currentNode.next;
+            count++; }
+
+        currentNode.prev.next = currentNode.next;
+        currentNode.next.prev = currentNode.prev;
+
+    this._length++;
+
+    return this;
+
+}
+   reverse() {}
+
+   indexOf(data) {
+    var currentNode = this._head,
+            count = 0;
+
+        while (count < this.length) {
+            if (currentNode.data == data) {
+                return count;
+            }
+            currentNode = currentNode.next;
+            count++;
+        }
+        return -1;
     }
-
-   function  reverse() {}
-
-    function indexOf(data) {}
+   
 }
 
 module.exports = LinkedList;
