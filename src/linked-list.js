@@ -75,9 +75,10 @@ if (this.length == 0) {
 } 
 
 clear() { 
-while (!this.isEmpty()) { 
- this.remove(); 
-} 
+this._head = null;
+this._tail = null;
+this.length = 0;
+return this;
 } 
 
 deleteAt(index) { 
