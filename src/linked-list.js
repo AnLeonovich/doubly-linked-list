@@ -9,9 +9,9 @@ class LinkedList {
     }
 
    append(data) {
-    var node = this._createNewNode(data);
+    let node = NewNode(data);
 
-    if (this._head != 0) {
+    if (this._head != null) {
       this._tail.next = node;
       node.prev = this._tail;
       this._tail = node;
@@ -33,19 +33,19 @@ class LinkedList {
     return this._tail.data;
     }
 
-   at(index) {!!!
+   at(index) {
       if (index >= 0 && index < this._length) {
-      var node = this._head;
+      let node = this._head;
       while (index--) {
       node = node.next;
       }
-      return node;
+      return node.data;
     }
 
     };
 
    insertAt(index, data) {
-    var node = new Node(data),
+    let node = new Node(data),
         currentNode = this.head,
         count = 0;
     if (!currentNode) {
@@ -56,12 +56,12 @@ class LinkedList {
     } else {
 
     while (count < index) {
-            currentNode = currentNode.next;
-            count++; }
-      node.prev = currentNode.prev;
-      node.next = currentNode;
-      currentNode.prev = node;
-}
+        currentNode = currentNode.next;
+        count++; }
+    node.prev = currentNode.prev;
+    node.next = currentNode;
+    currentNode.prev = node;
+    }
     this._length++;
 
     return this;
