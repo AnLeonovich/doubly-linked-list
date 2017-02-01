@@ -75,10 +75,11 @@ if (this.length == 0) {
 } 
 
 clear() { 
-this._head = null;
-this._tail = null;
-this.length = 0;
-return this;
+var node = new Node();
+      this._head = node;
+        this._tail = node;
+        this.length = 0;
+      return this;
 } 
 
 deleteAt(index) { 
